@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot01.dao.MotorMapper">
+    <select id="GETAllMotor" resultType="motor">
+        select * from cwd_db.Motor
+    </select>
+    <select id="GetMotorByIndex" parameterType="int" resultType="motor">
+        select * from cwd_db.Motor where motorindex = #{index}
+    </select>
+    <insert id="InsertMotor" parameterType="motor">
+        insert into cwd_db.Motor
+        (motorindex ,opmode ,
+         TargetPosition ,TargetTorque ,TargetVelocity,
+         CurrentPosition, CurrentTorque ,CurrentVelocity )values
+        (#{motorindex},#{opmode},
+         #{TargetPosition},#{TargetTorque},#{TargetVelocity},
+         #{CurrentPosition},#{CurrentTorque},#{CurrentVelocity});
+    </insert>
+    <delete id="DeleteMotorByIndex" parameterType="int">
+        delete from cwd_db.Motor where motorindex= #{index}
+    </delete>
+</mapper>
