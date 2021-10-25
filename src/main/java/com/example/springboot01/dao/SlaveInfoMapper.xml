@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot01.dao.SlaveInfoMapper">
+
+    <select id="GetAllSlaves" resultType="SlaveInfo">
+        select * from cwd_db.SlaveInfo
+    </select>
+
+    <select id="GetSlaveInfobyVenderid" parameterType="String" resultType="SlaveInfo">
+        select * from cwd_db.SlaveInfo where Venderid = #{venderID}
+    </select>
+
+    <insert id="InsertSlave" parameterType="SlaveInfo">
+        insert into cwd_db.SlaveInfo (name, VenderID, ProductCode, position,pdo_entries,pdos,syncs) values (
+        #{name},#{VenderID},#{ProductCode},#{position},#{pdo_entries},#{pdos},#{syncs});
+    </insert>
+
+    <delete id="deleteSlavebyVenderID" parameterType="String">
+        delete from cwd_db.SlaveInfo where VenderID = #{venderID}
+    </delete>
+</mapper>
