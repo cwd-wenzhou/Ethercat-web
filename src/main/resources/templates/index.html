@@ -311,11 +311,10 @@
                 <!-- statistics chart built with jQuery Flot -->
                 <div class="row-fluid chart">
                     <h4>
-                        Statistics
                          <div class="btn-group pull-right" >
-                            <button class="glow left" >DAY</button>
-                            <button class="glow middle active">MONTH</button>
-                            <button class="glow right">YEAR</button>
+                            <button class="glow left" onclick="setPosition()">Position</button>
+                            <button class="glow middle active" onclick="setTorque()">Torque</button>
+                            <button class="glow right" onclick="setVelocity()">Velocity</button>
                         </div>
                     </h4>
                     <div class="span12">
@@ -403,29 +402,52 @@
     <script src="js/jquery.flot.stack.js"></script>
     <script src="js/jquery.flot.resize.js"></script>
     <script src="js/theme.js"></script>
+    <script>
+        var chartDataType;
+        function setPosition(){
+            console.log("run in setPosition");
+            chartDataType="Position";
+        }
+
+        function setTorque(){
+            chartDataType="Torque";
+        }
+
+        function setVelocity(){
+            chartDataType="Velocity";
+        }
+    </script>
     <script type="text/javascript" th:inline="none">
-        var allmotor,data;
-        var currentVelocitys = [],targetPositions = [];
+        var plotdatas,data;
+        var currents = [],targets = [],times = [];
         function getdata () {
             // jQuery Flot Chart
             //allmotor = [[${allmotor}]];
-            $.get("/getAllMotors", function (data) {
-                allmotor = data;
+            var map="/Get"+chartDataType;
+            //console.log(map);
+            $.get(map, function (data) {
+                plotdatas = data;
                 //console.log(allmotor);
             });
-            currentVelocitys = [];
-            targetPositions = [];
-            for (let i = 0; i < allmotor.length; i++) {
-                currentVelocitys.push([i, allmotor[i].currentPosition]);
-                targetPositions.push([i, allmotor[i].targetPosition]);
+            //console.log(plotdatas);
+            currents = [];
+            targets = [];
+            times = [];
+            for (let i = 0; i < plotdatas.length; i++) {
+                currents.push([i, plotdatas[i].current]);
+                targets.push([i, plotdatas[i].target]);
+                let date = new Date(plotdatas[i].time);
+                console.log(data);
+                times.push([i, date.getMinutes()+":"+date.getSeconds()]);
             }
-            //console.log(currentVelocitys);
-            //console.log(targetPositions);
+            //console.log(currents);
+            //console.log(targets);
+            //console.log(times);
         }
         function plotdata(){
             $.plot($("#statsChart"),
-                [ { label: "targetPositions",data:targetPositions  },
-                    { label: "currentVelocitys",data:currentVelocitys }
+                [ { label: "target"+chartDataType,data:targets  },
+                    { label: "current"+chartDataType,data:currents }
                 ],
                 {
                     series: {
@@ -451,8 +473,7 @@
                     },
                     colors: ["#a7b5c5", "#30a0eb"],
                     xaxis: {
-                        ticks: [[1, "JAN"], [2, "FEB"], [3, "MAR"], [4,"APR"], [5,"MAY"], [6,"JUN"],
-                            [7,"JUL"], [8,"AUG"], [9,"SEP"], [10,"OCT"], [11,"NOV"], [12,"DEC"]],
+                        ticks: times,
                         font: {
                             size: 12,
                             family: "Open Sans, Arial",
@@ -508,7 +529,8 @@
     <script>
         $(function (){
             //Refresh();
-            setInterval(function (){
+            setPosition();
+            var timer=setInterval(function (){
                 getdata();
                 plotdata();
             },1000);

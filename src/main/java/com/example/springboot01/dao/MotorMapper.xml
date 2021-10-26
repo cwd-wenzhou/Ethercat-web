@@ -6,9 +6,35 @@
     <select id="GETAllMotor" resultType="motor">
         select * from cwd_db.Motor
     </select>
+
+    <select id="GetPosition" resultType="map">
+        select
+            TargetPosition as "target",
+            CurrentPosition as "current",
+            DataTime as "time"
+        from cwd_db.Motor
+    </select>
+
+    <select id="GetTorque" resultType="map">
+        select
+            TargetTorque as "target",
+            CurrentTorque as "current",
+            DataTime as "time"
+        from cwd_db.Motor
+    </select>
+
+    <select id="GetVelocity" resultType="map">
+        select
+            TargetVelocity as "target",
+            CurrentVelocity as "current",
+            DataTime as "time"
+        from cwd_db.Motor
+    </select>
+
     <select id="GetMotorByIndex" parameterType="int" resultType="motor">
         select * from cwd_db.Motor where motorindex = #{index}
     </select>
+
     <insert id="InsertMotor" parameterType="motor">
         insert into cwd_db.Motor
         (motorindex ,opmode ,

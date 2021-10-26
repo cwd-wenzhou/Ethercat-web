@@ -11,6 +11,9 @@ import java.util.Map;
 @Repository
 public interface MotorMapper {
     List<Motor> GETAllMotor();
+    List<Map> GetPosition();
+    List<Map> GetTorque();
+    List<Map> GetVelocity();
     Motor GetMotorByIndex(int index);
     void InsertMotor(Motor motor1);
     void DeleteMotorByIndex(int index);
