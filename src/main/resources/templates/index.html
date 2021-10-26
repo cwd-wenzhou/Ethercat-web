@@ -437,8 +437,7 @@
                 currents.push([i, plotdatas[i].current]);
                 targets.push([i, plotdatas[i].target]);
                 let date = new Date(plotdatas[i].time);
-                console.log(data);
-                times.push([i, date.getMinutes()+":"+date.getSeconds()]);
+                times.push([i, date.getMinutes()+':'+date.getSeconds()]);
             }
             //console.log(currents);
             //console.log(targets);
