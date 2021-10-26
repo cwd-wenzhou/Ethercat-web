@@ -45,7 +45,7 @@
                 <textarea class="span12"  rows="10" name="pdo_entries" placeholder="pdo_entries"></textarea>
                 <textarea class="span12"  rows="10" name="pdos" placeholder="pdos"></textarea>
                 <textarea class="span12"  rows="10" name="syncs" placeholder="syncs"></textarea>
-                <button type="submit" class="btn-glow primary signup">Sign up</button>
+                <button type="submit" class="btn-glow primary signup" onclick="myFunction">Sign up</button>
             </form>
         </div>
 
@@ -53,10 +53,51 @@
             <p>Already have an account?</p>
             <a href="signin.html">Sign in</a>
         </div>
+        <div class="text">
+            <h2>AJAX change here</h2>
+        </div>
+
+        <div class="button">
+            <button id="test">get all motor</button>
+        </div>
     </div>
 
-	<!-- scripts -->
+
+
+
+
+
+<!-- scripts -->
     <script src="http://code.jquery.com/jquery-latest.js"></script>
+<!--    <script type="text/javascript" >-->
+<!--    function ajaxtestGetallMotor(){-->
+<!--        var xmlhttp;-->
+<!--        if (window.XMLHttpRequest)-->
+<!--        {-->
+<!--            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码-->
+<!--            xmlhttp=new XMLHttpRequest();-->
+<!--        }-->
+<!--        else-->
+<!--        {-->
+<!--            // IE6, IE5 浏览器执行代码-->
+<!--            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");-->
+<!--        }-->
+<!--        xmlhttp.open("GET","/getAllMotors",true);-->
+<!--        xmlhttp.send();-->
+<!--        data1 = xmlhttp.response;-->
+<!--        console.log(data1);-->
+<!--    }-->
+<!--    </script>-->
+    <script type="text/javascript">
+        // $(document).ready(function(){
+            $("#test").click(function (){
+                $.get("/getAllMotors",function (data){
+                    console.log(data);
+                    console.log(data[0].motorindex);
+                });
+            });
+        // });
+    </script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>

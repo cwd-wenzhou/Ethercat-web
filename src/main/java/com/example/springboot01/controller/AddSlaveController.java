@@ -22,7 +22,7 @@ public class AddSlaveController {
     @PostMapping ({"/addslave","/addslave.html"})
     public String addslaveimpl(SlaveInfo slaveInfo){
         //model.getAttribute("")
-        slaveInfoMapper.InsertSlave(slaveInfo);
+        //slaveInfoMapper.InsertSlave(slaveInfo);
         System.out.println(slaveInfo);
         System.out.println("run here");
         return "redirect:/index";

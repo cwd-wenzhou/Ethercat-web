@@ -16,6 +16,7 @@ public class MotorController {
 
     @GetMapping("/getAllMotors")
     public List<Motor> GetAllMotors(){
+        System.out.println("run getAllMotors");
         return  motorMapper.GETAllMotor();
     }
 }
