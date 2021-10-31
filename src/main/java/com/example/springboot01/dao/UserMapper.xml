@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springboot01.dao.UserMapper">
+
+    <select id="GetUserbyName" resultType="SlaveInfo">
+        select * from cwd_db.User where name = #{name}
+    </select>
+
+    <select id="GetPswbyName" parameterType="String" resultType="String">
+        select password from cwd_db.User where name = #{name}
+    </select>
+
+    <insert id="InsertUser" parameterType="User">
+        insert into cwd_db.User (email, name, password)
+        values (#{email},#{name},#{password});
+    </insert>
+
+    <update id="UpdatePwd" parameterType="User" >
+        UPDATE cwd_db.User
+        SET password=#{password}
+        WHERE name = #{name} and email = #{email}
+    </update>
+</mapper>

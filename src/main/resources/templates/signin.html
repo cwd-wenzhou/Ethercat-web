@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="login-bg">
+<html class="login-bg" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Detail Admin - Sign in</title>
     <meta name="author" content="order by genban.org"/>
@@ -67,15 +67,17 @@
 
         <div class="span4 box">
             <div class="content-wrap">
-                <h6>Log in</h6>
-                <input class="span12" type="text" placeholder="E-mail address" />
-                <input class="span12" type="password" placeholder="Your password" />
-                <a href="#" class="forgot">Forgot password?</a>
-                <div class="remember">
-                    <input id="remember-me" type="checkbox" />
-                    <label for="remember-me">Remember me</label>
-                </div>
-                <a class="btn-glow primary login" href="index.html">Log in</a>
+                <form class="content-wrap" action="signin" method="post">
+                    <h6>Log in</h6>
+                    <input name="Name" class="span12" type="text" placeholder="your username" />
+                    <input name="Password" class="span12" type="password" placeholder="Your password" />
+<!--                    <a href="#" class="forgot">Forgot password?</a>-->
+<!--                    <div class="remember">-->
+<!--                        <input id="remember-me" type="checkbox" />-->
+<!--                        <label for="remember-me">Remember me</label>-->
+<!--                    </div>-->
+                    <button type="submit" class="btn-glow primary login" >Log in</button>
+                </form>
             </div>
         </div>
 
