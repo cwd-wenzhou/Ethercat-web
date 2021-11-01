@@ -8,6 +8,7 @@ import com.example.springboot01.dao.UserMapper;
 import com.example.springboot01.pojo.Motor;
 import com.example.springboot01.pojo.SlaveInfo;
 import com.example.springboot01.pojo.User;
+import com.example.springboot01.service.impl.MotorServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -90,5 +91,13 @@ class Springboot01ApplicationTests {
         //System.out.println(motor1);
         //System.out.println(redisTemplate.keys("*"));
         //Set<String> keys = redisTemplate.keys("cwd");
+    }
+
+    @Test
+    public void Cache(){
+        MotorServiceImpl motorService = new MotorServiceImpl(motorMapper);
+        System.out.println(motorService.GETAllMotor());
+        System.out.println(motorService.GETAllMotor());
+
     }
 }

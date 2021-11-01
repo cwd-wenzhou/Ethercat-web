@@ -12,6 +12,10 @@
         select * from cwd_db.SlaveInfo where Venderid = #{venderID}
     </select>
 
+    <select id="GetSlaveInfobyName" parameterType="String" resultType="SlaveInfo">
+        select * from cwd_db.SlaveInfo where name = #{name}
+    </select>
+
     <insert id="InsertSlave" parameterType="SlaveInfo">
         insert into cwd_db.SlaveInfo (name, VenderID, ProductCode, position,pdo_entries,pdos,syncs) values (
         #{name},#{VenderID},#{ProductCode},#{position},#{pdo_entries},#{pdos},#{syncs});

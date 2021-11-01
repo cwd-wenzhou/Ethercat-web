@@ -3,11 +3,14 @@ package com.example.springboot01.service.impl;
 import com.example.springboot01.dao.SlaveInfoMapper;
 import com.example.springboot01.pojo.SlaveInfo;
 import com.example.springboot01.service.SlaveService;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "slave")
 public class SlaveServiceImpl implements SlaveService {
     private final SlaveInfoMapper slaveInfoMapper;
 
@@ -16,22 +19,31 @@ public class SlaveServiceImpl implements SlaveService {
     }
 
     @Override
+    //@Cacheable(value = "#GetAllSlaves")
     public List<SlaveInfo> GetAllSlaves() {
+
         return slaveInfoMapper.GetAllSlaves();
     }
 
     @Override
+    @Cacheable(value = "#GetSlaveInfobyVenderid")
     public SlaveInfo GetSlaveInfobyVenderid(String venderID) {
         return slaveInfoMapper.GetSlaveInfobyVenderid(venderID);
     }
+    @Cacheable(value = "#GetSlaveInfobyName")
+    public SlaveInfo GetSlaveInfobyName(String name) {
 
+        return slaveInfoMapper.GetSlaveInfobyName(name);
+    }
     @Override
     public void InsertSlave(SlaveInfo slaveInfo) {
+
         slaveInfoMapper.InsertSlave(slaveInfo);
     }
 
     @Override
     public void deleteSlavebyVenderID(String venderID) {
+
         slaveInfoMapper.deleteSlavebyVenderID(venderID);
     }
 }

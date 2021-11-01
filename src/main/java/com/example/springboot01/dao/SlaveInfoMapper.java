@@ -11,6 +11,7 @@ import java.util.List;
 public interface SlaveInfoMapper {
     List<SlaveInfo> GetAllSlaves();
     SlaveInfo GetSlaveInfobyVenderid(String venderID);
+    SlaveInfo GetSlaveInfobyName(String name);
     void InsertSlave(SlaveInfo slaveInfo);
     void deleteSlavebyVenderID(String venderID);
 

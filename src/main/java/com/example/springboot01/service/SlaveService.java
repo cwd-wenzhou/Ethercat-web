@@ -7,6 +7,7 @@ import java.util.List;
 public interface SlaveService {
     List<SlaveInfo> GetAllSlaves();
     SlaveInfo GetSlaveInfobyVenderid(String venderID);
+    SlaveInfo GetSlaveInfobyName(String name);
     void InsertSlave(SlaveInfo slaveInfo);
     void deleteSlavebyVenderID(String venderID);
 }

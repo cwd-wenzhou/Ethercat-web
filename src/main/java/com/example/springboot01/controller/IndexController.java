@@ -4,6 +4,7 @@ import com.example.springboot01.dao.MotorMapper;
 import com.example.springboot01.dao.SlaveInfoMapper;
 import com.example.springboot01.pojo.Motor;
 import com.example.springboot01.pojo.SlaveInfo;
+import com.example.springboot01.service.impl.SlaveServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +21,14 @@ public class IndexController {
     private MotorMapper motorMapper;
 
     @Autowired
-    private SlaveInfoMapper slaveInfoMapper;
+    private SlaveServiceImpl slaveService;
 
     @GetMapping({"/index","/","/#","/index.html"})
     public String index(Model model){
-        List<Motor> allMotors = motorMapper.GETAllMotor();
-        List<SlaveInfo> slaveInfos = slaveInfoMapper.GetAllSlaves();
-
-        model.addAttribute("allmotor",allMotors);
+        //List<Motor> allMotors = motorMapper.GETAllMotor();
+        List<SlaveInfo> slaveInfos = slaveService.GetAllSlaves();
+        System.out.println(slaveService.GetSlaveInfobyName("Beckhoff_EL4102"));
+        //model.addAttribute("allmotor",allMotors);
         model.addAttribute("slaveInfos",slaveInfos);
 
         return "index";

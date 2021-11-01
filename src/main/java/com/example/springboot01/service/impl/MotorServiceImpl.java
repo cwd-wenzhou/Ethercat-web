@@ -3,12 +3,15 @@ package com.example.springboot01.service.impl;
 import com.example.springboot01.dao.MotorMapper;
 import com.example.springboot01.pojo.Motor;
 import com.example.springboot01.service.MotorService;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 @Service
+@CacheConfig(cacheNames = "motor")
 public class MotorServiceImpl implements MotorService {
     private final MotorMapper motorMapper;
 
@@ -37,6 +40,7 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
+    @Cacheable(value = "#motorindex")
     public Motor GetMotorByIndex(int index) {
         return motorMapper.GetMotorByIndex(index);
     }
