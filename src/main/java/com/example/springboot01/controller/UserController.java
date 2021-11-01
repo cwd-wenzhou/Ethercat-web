@@ -1,18 +1,19 @@
 package com.example.springboot01.controller;
 
-import com.example.springboot01.dao.UserMapper;
 import com.example.springboot01.pojo.User;
+import com.example.springboot01.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class SigninController {
-    private final UserMapper userMapper;
+public class UserController {
+    private final UserService userService;
 
-    public SigninController(UserMapper userMapper) {
-        this.userMapper = userMapper;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
+
 
     @GetMapping({"/signin","/signin.html"})
     public String signin(){
@@ -22,9 +23,9 @@ public class SigninController {
     @PostMapping("/signin")
     public String signinUser(User user){
         System.out.println(user);
-        System.out.println(userMapper.GetPswbyName(user.getName()));
+        System.out.println(userService.GetPswbyName(user.getName()));
         System.out.println(user.getPassword());
-        if (userMapper.GetPswbyName(user.getName()).equals(user.getPassword()))
+        if (userService.GetPswbyName(user.getName()).equals(user.getPassword()))
             return "redirect:/index";
         else
             return "signin";
@@ -37,7 +38,7 @@ public class SigninController {
 
     @PostMapping({"/signup","/signup.html"})
     public String signupUser(User user){
-        userMapper.InsertUser(user);
+        userService.InsertUser(user);
         return "index";
     }
 }

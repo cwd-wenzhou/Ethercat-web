@@ -1,17 +1,17 @@
 package com.example.springboot01.controller;
 
-import com.example.springboot01.dao.SlaveInfoMapper;
 import com.example.springboot01.pojo.SlaveInfo;
+import com.example.springboot01.service.SlaveService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-public class AddSlaveController {
-    private final SlaveInfoMapper slaveInfoMapper;
+public class SlaveController {
+    private final SlaveService slaveService;
 
-    public AddSlaveController(SlaveInfoMapper slaveInfoMapper) {
-        this.slaveInfoMapper = slaveInfoMapper;
+    public SlaveController(SlaveService slaveService) {
+        this.slaveService = slaveService;
     }
 
     @GetMapping ({"/addslave","/addslave.html"})
@@ -22,7 +22,7 @@ public class AddSlaveController {
     @PostMapping ({"/addslave","/addslave.html"})
     public String addslaveimpl(SlaveInfo slaveInfo){
         //model.getAttribute("")
-        slaveInfoMapper.InsertSlave(slaveInfo);
+        slaveService.InsertSlave(slaveInfo);
         System.out.println(slaveInfo);
         //System.out.println("run here");
         return "redirect:/index";

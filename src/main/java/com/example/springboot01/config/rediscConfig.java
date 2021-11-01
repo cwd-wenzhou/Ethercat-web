@@ -1,11 +1,19 @@
 package com.example.springboot01.config;
 
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCache;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializationContext;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.time.Duration;
 
 @Configuration
 public class rediscConfig {
@@ -29,6 +37,30 @@ public class rediscConfig {
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setConnectionFactory(redisConnectionFactory);
         return template;
+    }
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory factory) {
+        FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        RedisCacheConfiguration redisCacheConfiguration1 = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(10))   // 设置过期时间 10 分钟
+                .prefixCacheNameWith("cache:user")      // 设置缓存前缀
+                .disableCachingNullValues()                // 禁止缓存 null 值
+                // 设置 key 序列化
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer))
+                // 设置 value 序列化
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(fastJsonRedisSerializer));
+
+        RedisCacheConfiguration redisCacheConfiguration2 = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofMinutes(10))
+                .prefixCacheNameWith("cache:user")
+                .disableCachingNullValues()
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer))
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(jackson2JsonRedisSerializer));
+        return RedisCacheManager.builder(factory)
+                .withCacheConfiguration("user",redisCacheConfiguration1)
+                .withCacheConfiguration("userinfo",redisCacheConfiguration2)
+                .build();
     }
 
 }
