@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@CacheConfig(cacheNames = "slave")
+@CacheConfig
 public class SlaveServiceImpl implements SlaveService {
     private final SlaveInfoMapper slaveInfoMapper;
 
@@ -45,5 +45,10 @@ public class SlaveServiceImpl implements SlaveService {
     public void deleteSlavebyVenderID(String venderID) {
 
         slaveInfoMapper.deleteSlavebyVenderID(venderID);
+    }
+
+    @Override
+    public Integer NumofSlaves() {
+        return slaveInfoMapper.NumofSlaves();
     }
 }

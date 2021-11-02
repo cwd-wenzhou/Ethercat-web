@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface MotorService {
     List<Motor> GETAllMotor();
-    List<Map> GetPosition();
-    List<Map> GetTorque();
-    List<Map> GetVelocity();
+    List<Map> GetPosition(String pos);
+    List<Map> GetTorque(String pos);
+    List<Map> GetVelocity(String pos);
     Motor GetMotorByIndex(int index);
     void InsertMotor(Motor motor1);
     void DeleteMotorByIndex(int index);

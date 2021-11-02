@@ -1,9 +1,10 @@
 CREATE TABLE SlaveInfo
 (
+
     name varchar(255),
     VenderID varchar(1024),
     ProductCode varchar(1024),
-    position int,
+    position int primary key ,
     pdo_entries varchar(1024),
     pdos varchar(255),
     syncs varchar(255)

@@ -24,4 +24,8 @@
     <delete id="deleteSlavebyVenderID" parameterType="String">
         delete from cwd_db.SlaveInfo where VenderID = #{venderID}
     </delete>
+
+    <select id="NumofSlaves" resultType="integer">
+        select count(*) from SlaveInfo
+    </select>
 </mapper>

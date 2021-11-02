@@ -25,18 +25,20 @@ public class MotorServiceImpl implements MotorService {
     }
 
     @Override
-    public List<Map> GetPosition() {
-        return motorMapper.GetPosition();
+    public List<Map> GetPosition(String pos) {
+        //System.out.println(pos);
+        return motorMapper.GetPosition(pos);
     }
 
     @Override
-    public List<Map> GetTorque() {
-        return motorMapper.GetTorque();
+    public List<Map> GetTorque(String pos) {
+        return motorMapper.GetTorque(pos);
     }
 
     @Override
-    public List<Map> GetVelocity() {
-        return motorMapper.GetVelocity();
+    public List<Map> GetVelocity(String pos) {
+
+        return motorMapper.GetVelocity(pos);
     }
 
     @Override

@@ -276,8 +276,8 @@
                 <div class="row-fluid stats-row">
                     <div class="span3 stat">
                         <div class="data">
-                            <span class="number" th:text="${data}">2457</span>
-                            visits
+                            <span class="number" id="slaveNum">**</span>
+                            Slaves
                         </div>
                         <span class="date">Today</span>
                     </div>
@@ -306,17 +306,37 @@
             </div>
             <!-- end upper main stats -->
 
-            <div id="pad-wrapper">
 
+            <div id="pad-wrapper">
                 <!-- statistics chart built with jQuery Flot -->
                 <div class="row-fluid chart">
-                    <h4>
-                         <div class="btn-group pull-right" >
-                            <button class="glow left" onclick="setPosition()">Position</button>
-                            <button class="glow middle active" onclick="setTorque()">Torque</button>
-                            <button class="glow right" onclick="setVelocity()">Velocity</button>
+<!--                    <h4>-->
+<!--                         <div class="btn-group pull-right" >-->
+<!--                            <button class="glow left" onclick="setPosition()">Position</button>-->
+<!--                            <button class="glow middle active" onclick="setTorque()">Torque</button>-->
+<!--                            <button class="glow right" onclick="setVelocity()">Velocity</button>-->
+<!--                         </div>-->
+<!--                    </h4>-->
+                    <div id="selectDataSource" class="pull-right">
+                        <div class="ui-select">
+                            <select id="pos">
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
+<!--                                <option>3</option>-->
+                            </select>
                         </div>
-                    </h4>
+                        <div class="ui-select">
+                            <select id="dataType">
+                                <option>Position</option>
+                                <option>Torque</option>
+                                <option>Velocity</option>
+                            </select>
+                        </div>
+
+                        <button onclick="setData()" class="btn-flat new-product">
+                            display chart
+                        </button>
+                    </div>
                     <div class="span12">
                         <div id="statsChart"></div>
                     </div>
@@ -403,28 +423,24 @@
     <script src="js/jquery.flot.resize.js"></script>
     <script src="js/theme.js"></script>
     <script>
-        var chartDataType;
-        function setPosition(){
-            console.log("run in setPosition");
-            chartDataType="Position";
-        }
-
-        function setTorque(){
-            chartDataType="Torque";
-        }
-
-        function setVelocity(){
-            chartDataType="Velocity";
+        var pos="1",dataType="Position";
+        function setData(){
+            pos = document.getElementById("pos").value;
+            dataType = document.getElementById("dataType").value;
+            getdata();
+            //console.log(pos);
+            //console.log(dataType);
         }
     </script>
+
     <script type="text/javascript" th:inline="none">
         var plotdatas,data;
         var currents = [],targets = [],times = [];
         function getdata () {
             // jQuery Flot Chart
             //allmotor = [[${allmotor}]];
-            var map="/Get"+chartDataType;
-            //console.log(map);
+            var map="/Get"+dataType+"/"+pos;
+            console.log(map);
             $.get(map, function (data) {
                 plotdatas = data;
                 //console.log(allmotor);
@@ -445,8 +461,8 @@
         }
         function plotdata(){
             $.plot($("#statsChart"),
-                [ { label: "target"+chartDataType,data:targets  },
-                    { label: "current"+chartDataType,data:currents }
+                [ { label: "target"+dataType,data:targets  },
+                    { label: "current"+dataType,data:currents }
                 ],
                 {
                     series: {
@@ -481,8 +497,8 @@
                         }
                     },
                     yaxis: {
-                        //ticks:3,
-                        //tickDecimals: 0,
+                        ticks:3,
+                        tickDecimals: 0,
                         font: {size:12, color: "#9da3a9"}
                     }
                 });
@@ -528,7 +544,16 @@
     <script>
         $(function (){
             //Refresh();
-            setPosition();
+            //setPosition();
+            $.get("/SlaveNum",function (data){
+
+                document.getElementById("slaveNum").innerHTML=data;
+                var obj=document.getElementById("pos");
+                for (let i=1;i<=data;i++){
+                    obj.add(new Option(i,i));
+                }
+                //console.log(data);
+            })
             var timer=setInterval(function (){
                 getdata();
                 plotdata();

@@ -12,7 +12,7 @@
             TargetPosition as "target",
             CurrentPosition as "current",
             DataTime as "time"
-        from cwd_db.Motor
+        from cwd_db.Motor${pos}
     </select>
 
     <select id="GetTorque" resultType="map">
@@ -20,7 +20,7 @@
             TargetTorque as "target",
             CurrentTorque as "current",
             DataTime as "time"
-        from cwd_db.Motor
+        from cwd_db.Motor${pos}
     </select>
 
     <select id="GetVelocity" resultType="map">
@@ -28,7 +28,7 @@
             TargetVelocity as "target",
             CurrentVelocity as "current",
             DataTime as "time"
-        from cwd_db.Motor
+        from cwd_db.Motor${pos}
     </select>
 
     <select id="GetMotorByIndex" parameterType="int" resultType="motor">

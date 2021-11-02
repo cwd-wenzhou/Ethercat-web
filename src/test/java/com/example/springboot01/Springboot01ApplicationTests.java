@@ -45,23 +45,25 @@ class Springboot01ApplicationTests {
     @Test
     void slaveInfoMapperTest() {
 
-        System.out.println(dataSource.getClass());
-        System.out.println(slaveInfoMapper.GetAllSlaves());
-        SlaveInfo testslave = new SlaveInfo("CWDTEST", "1234", "2021", 5, "CWD", "LY", "IMC");
-        slaveInfoMapper.InsertSlave(testslave);
-        System.out.println(slaveInfoMapper.GetAllSlaves());
-        slaveInfoMapper.deleteSlavebyVenderID("1234");
+//        System.out.println(dataSource.getClass());
+//        System.out.println(slaveInfoMapper.GetAllSlaves());
+//        SlaveInfo testslave = new SlaveInfo("CWDTEST", "1234", "2021", 5, "CWD", "LY", "IMC");
+//        slaveInfoMapper.InsertSlave(testslave);
+//        System.out.println(slaveInfoMapper.GetAllSlaves());
+//        slaveInfoMapper.deleteSlavebyVenderID("1234");
+//        System.out.println(slaveInfoMapper.NumofSlaves());
     }
 
     @Test
     void motorMapperTest() {
-        System.out.println(motorMapper.GetPosition());
-
-        System.out.println(userMapper.GetPswbyName("cwd"));
-        Motor motor = new Motor(1234, 22, 1, 1, 1, 1, 1, 1);
-        motorMapper.InsertMotor(motor);
-        System.out.println(motorMapper.GETAllMotor());
-        motorMapper.DeleteMotorByIndex(1234);
+//        System.out.println(motorMapper.GetPosition());
+//
+//        System.out.println(userMapper.GetPswbyName("cwd"));
+//        Motor motor = new Motor(1234, 22, 1, 1, 1, 1, 1, 1);
+//        motorMapper.InsertMotor(motor);
+//        System.out.println(motorMapper.GETAllMotor());
+//        motorMapper.DeleteMotorByIndex(1234);
+        System.out.println(motorMapper.GetTorque("1"));
     }
 
     @Test

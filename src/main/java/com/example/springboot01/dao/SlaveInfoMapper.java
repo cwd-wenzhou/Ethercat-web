@@ -14,5 +14,5 @@ public interface SlaveInfoMapper {
     SlaveInfo GetSlaveInfobyName(String name);
     void InsertSlave(SlaveInfo slaveInfo);
     void deleteSlavebyVenderID(String venderID);
-
+    Integer NumofSlaves();
 }

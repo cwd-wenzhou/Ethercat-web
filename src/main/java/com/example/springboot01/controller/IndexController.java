@@ -27,7 +27,7 @@ public class IndexController {
     public String index(Model model){
         //List<Motor> allMotors = motorMapper.GETAllMotor();
         List<SlaveInfo> slaveInfos = slaveService.GetAllSlaves();
-        System.out.println(slaveService.GetSlaveInfobyName("Beckhoff_EL4102"));
+        //System.out.println(slaveService.GetSlaveInfobyName("Beckhoff_EL4102"));
         //model.addAttribute("allmotor",allMotors);
         model.addAttribute("slaveInfos",slaveInfos);
 
