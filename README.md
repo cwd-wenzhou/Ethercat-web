@@ -1,6 +1,7 @@
 # Ethercat-web
 ##基本页面
-![image](https://github.com/cwd-wenzhou/Ethercat-web/blob/main/src/photo/2021-10-30%2009-40-49web%E6%88%AA%E5%9B%BE.png)
+![image](https://github.com/cwd-wenzhou/Ethercat-web/blob/main/src/photo/3position.png)
+![image](https://github.com/cwd-wenzhou/Ethercat-web/blob/main/src/photo/3torque.png)
 ##QuickStart
 1. 执行sql脚本
 2. 在idea中启动项目
