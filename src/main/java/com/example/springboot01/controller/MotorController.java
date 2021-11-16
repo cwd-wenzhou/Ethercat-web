@@ -26,25 +26,28 @@ public class MotorController {
         return  motorService.GETAllMotor();
     }
 
-    @GetMapping("/GetPosition/{position}")
-    public List<Map> GetPosition(@PathVariable("position") String pos){
+    @GetMapping("/GetPosition/{position}/{timeval}")
+    public List<Map> GetPosition(@PathVariable("position") String pos,@PathVariable("timeval") long timeval){
         //System.out.println("run GetPosition");
         //System.out.println(pos);
         //return motorService.GetPosition(pos);
-        Date date = new Date(System.currentTimeMillis()-60000);
+        //System.out.println(pos+"timeval="+timeval);
+        Date date = new Date(System.currentTimeMillis()-timeval);
         return motorService.GetPositionByTime(pos,date,new Date(System.currentTimeMillis()));
     }
 
-    @GetMapping("/GetTorque/{position}")
-    public List<Map> GetTorque(@PathVariable("position") String pos){
+    @GetMapping("/GetTorque/{position}/{timeval}")
+    public List<Map> GetTorque(@PathVariable("position") String pos,@PathVariable("timeval") long timeval){
         //System.out.println("run GetTorque");
-        return motorService.GetTorque(pos);
+        Date date = new Date(System.currentTimeMillis()-timeval);
+        return motorService.GetTorqueByTime(pos,date,new Date(System.currentTimeMillis()));
     }
 
-    @GetMapping("/GetVelocity/{position}")
-    public List<Map> GetVelocity(@PathVariable("position") String pos){
+    @GetMapping("/GetVelocity/{position}/{timeval}")
+    public List<Map> GetVelocity(@PathVariable("position") String pos,@PathVariable("timeval") long timeval){
         //System.out.println("run GetVelocity");
-        return motorService.GetVelocity(pos);
+        Date date = new Date(System.currentTimeMillis()-timeval);
+        return motorService.GetVelocityByTime(pos,date,new Date(System.currentTimeMillis()));
     }
 
 
