@@ -7,7 +7,7 @@
         select * from cwd_db.Motor
     </select>
 
-    <select id="GetPosition" resultType="map">
+    <select id="GetAllPosition" resultType="map">
         select
             TargetPosition as "target",
             CurrentPosition as "current",
@@ -15,7 +15,7 @@
         from cwd_db.Motor${pos}
     </select>
 
-    <select id="GetTorque" resultType="map">
+    <select id="GetAllTorque" resultType="map">
         select
             TargetTorque as "target",
             CurrentTorque as "current",
@@ -23,13 +23,41 @@
         from cwd_db.Motor${pos}
     </select>
 
-    <select id="GetVelocity" resultType="map">
+    <select id="GetAllVelocity" resultType="map">
         select
             TargetVelocity as "target",
             CurrentVelocity as "current",
             DataTime as "time"
         from cwd_db.Motor${pos}
     </select>
+
+    <select id="GetPositionByTime" resultType="map" >
+        select
+            TargetPosition as "target",
+            CurrentPosition as "current",
+            DataTime as "time"
+        from cwd_db.Motor${pos}
+        where Datatime between #{starttime} and #{stoptime}
+    </select>
+
+    <select id="GetTorqueByTime" resultType="map">
+        select
+            TargetTorque as "target",
+            CurrentTorque as "current",
+            DataTime as "time"
+        from cwd_db.Motor${pos}
+        where Datatime between  #{starttime} and #{stoptime}
+    </select>
+
+    <select id="GetVelocityByTime" resultType="map">
+        select
+            TargetVelocity as "target",
+            CurrentVelocity as "current",
+            DataTime as "time"
+        from cwd_db.Motor${pos}
+        where Datatime between #{starttime} and #{stoptime}
+    </select>
+
 
     <select id="GetMotorByIndex" parameterType="int" resultType="motor">
         select * from cwd_db.Motor where motorindex = #{index}

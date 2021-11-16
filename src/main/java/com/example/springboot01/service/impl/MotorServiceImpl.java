@@ -7,6 +7,8 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -27,18 +29,33 @@ public class MotorServiceImpl implements MotorService {
     @Override
     public List<Map> GetPosition(String pos) {
         //System.out.println(pos);
-        return motorMapper.GetPosition(pos);
+        return motorMapper.GetAllPosition(pos);
     }
 
     @Override
     public List<Map> GetTorque(String pos) {
-        return motorMapper.GetTorque(pos);
+        return motorMapper.GetAllTorque(pos);
     }
 
     @Override
     public List<Map> GetVelocity(String pos) {
 
-        return motorMapper.GetVelocity(pos);
+        return motorMapper.GetAllVelocity(pos);
+    }
+
+    @Override
+    public List<Map> GetPositionByTime(String pos, Date starttime, Date stoptime) {
+        return motorMapper.GetPositionByTime(pos, starttime, stoptime);
+    }
+
+    @Override
+    public List<Map> GetTorqueByTime(String pos, Date starttime, Date stoptime) {
+        return motorMapper.GetTorqueByTime(pos, starttime, stoptime);
+    }
+
+    @Override
+    public List<Map> GetVelocityByTime(String pos, Date starttime, Date stoptime) {
+        return motorMapper.GetVelocityByTime(pos, starttime, stoptime);
     }
 
     @Override

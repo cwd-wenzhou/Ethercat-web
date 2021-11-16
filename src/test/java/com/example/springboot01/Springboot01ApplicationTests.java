@@ -1,14 +1,14 @@
 package com.example.springboot01;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import com.example.springboot01.dao.MotorMapper;
 import com.example.springboot01.dao.SlaveInfoMapper;
 import com.example.springboot01.dao.UserMapper;
 import com.example.springboot01.pojo.Motor;
-import com.example.springboot01.pojo.SlaveInfo;
 import com.example.springboot01.pojo.User;
+import com.example.springboot01.service.MotorService;
 import com.example.springboot01.service.impl.MotorServiceImpl;
+import io.lettuce.core.ScriptOutputType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +17,8 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import javax.sql.DataSource;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.Date;
 
 @SpringBootTest
 class Springboot01ApplicationTests {
@@ -39,6 +40,9 @@ class Springboot01ApplicationTests {
     private UserMapper userMapper;
 
     @Autowired
+    private MotorService motorService;
+
+    @Autowired
     @Qualifier("MyRedisTemplate")
     private  RedisTemplate<Object,Object> redisTemplate;
 
@@ -52,6 +56,7 @@ class Springboot01ApplicationTests {
 //        System.out.println(slaveInfoMapper.GetAllSlaves());
 //        slaveInfoMapper.deleteSlavebyVenderID("1234");
 //        System.out.println(slaveInfoMapper.NumofSlaves());
+
     }
 
     @Test
@@ -63,7 +68,13 @@ class Springboot01ApplicationTests {
 //        motorMapper.InsertMotor(motor);
 //        System.out.println(motorMapper.GETAllMotor());
 //        motorMapper.DeleteMotorByIndex(1234);
-        System.out.println(motorMapper.GetTorque("1"));
+//        System.out.println(motorMapper.GetAllTorque("1"));
+        Date Startdate = new Date(1633753542000L);
+        Date Enddate = new Date(1636963137000L);
+        //System.out.println(l);
+        Date date = new Date(1637049182000L-60000);
+        System.out.println(date);
+        System.out.println(motorService.GetPositionByTime("1",date,new Date(1637049182000L)));
     }
 
     @Test
@@ -73,7 +84,7 @@ class Springboot01ApplicationTests {
         user.setPassword("cwdthere");
         System.out.println(userMapper.UpdatePwd(user));
         System.out.println(userMapper.UpdatePwd(user));
-        System.out.println(userMapper.GetPswbyName("cwd"));
+        //System.out.println(userMapper.GetPswbyName("cwd"));
         System.out.println(userMapper.GetPswbyName("vvyhg"));
     }
 
