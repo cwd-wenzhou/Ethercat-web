@@ -13,5 +13,5 @@ html,css, javascript, ajax,
 sql, redis, druid池化技术
 
 #后台数据来源为内核模块与伺服电机的控制与采集。
-https://github.com/cwd-wenzhou/Ethercat-server-control
-https://github.com/cwd-wenzhou/Ethercat-kernel
+### https://github.com/cwd-wenzhou/Ethercat-server-control
+### https://github.com/cwd-wenzhou/Ethercat-kernel
